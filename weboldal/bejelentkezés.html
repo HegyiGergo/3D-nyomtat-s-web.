@@ -1,0 +1,432 @@
+     <!--<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés / Regisztráció</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Bejelentkezés</h2>
+        <input type="text" id="loginUsername" placeholder="Felhasználónév">
+        <input type="password" id="loginPassword" placeholder="Jelszó">
+        <button onclick="login()">Bejelentkezés</button>
+
+        <h2>Regisztráció</h2>
+        <input type="text" id="registerUsername" placeholder="Felhasználónév">
+        <input type="password" id="registerPassword" placeholder="Jelszó">
+        <button onclick="register()">Regisztráció</button>
+    </div>
+
+    <script>
+        function register() {
+            let username = document.getElementById('registerUsername').value;
+            let password = document.getElementById('registerPassword').value;
+
+            // Egyszerű ellenőrzés, hogy minden mező ki van-e töltve
+            if (username === '' || password === '') {
+                alert('Kérlek töltsd ki az összes mezőt!');
+                return;
+            }
+
+            // Felhasználói adatok tárolása a localStorage-ban
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+            alert('Sikeres regisztráció!');
+        }
+
+        function login() {
+            let loginUsername = document.getElementById('loginUsername').value;
+            let loginPassword = document.getElementById('loginPassword').value;
+
+            // Felhasználói adatok lekérdezése a localStorage-ból
+            let storedUsername = localStorage.getItem('username');
+            let storedPassword = localStorage.getItem('password');
+
+            // Bejelentkezési ellenőrzés
+            if (loginUsername === storedUsername && loginPassword === storedPassword) {
+                alert('Sikeres bejelentkezés!');
+                // Átirányítás másik oldalra (pl. kezdőlapra)
+                window.location.href = "index.html";
+            } else {
+                alert('Hibás felhasználónév vagy jelszó!');
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+
+
+ -->
+
+ <!-- <!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés / Regisztráció</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Bejelentkezés</h2>
+        <input type="text" id="loginUsername" placeholder="Felhasználónév">
+        <input type="password" id="loginPassword" placeholder="Jelszó">
+        <button onclick="login()">Bejelentkezés</button>
+
+        <h2>Regisztráció</h2>
+        <input type="text" id="registerUsername" placeholder="Felhasználónév">
+        <input type="password" id="registerPassword" placeholder="Jelszó">
+        <button onclick="register()">Regisztráció</button>
+    </div>
+
+    <script>
+        function register() {
+            let username = document.getElementById('registerUsername').value;
+            let password = document.getElementById('registerPassword').value;
+
+            // Egyszerű ellenőrzés, hogy minden mező ki van-e töltve
+            if (username === '' || password === '') {
+                alert('Kérlek töltsd ki az összes mezőt!');
+                return;
+            }
+
+            // Felhasználói adatok tárolása a localStorage-ban
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+            alert('Sikeres regisztráció!');
+        }
+
+        function login() {
+            let loginUsername = document.getElementById('loginUsername').value;
+            let loginPassword = document.getElementById('loginPassword').value;
+
+            // Felhasználói adatok lekérdezése a localStorage-ból
+            let storedUsername = localStorage.getItem('username');
+            let storedPassword = localStorage.getItem('password');
+
+            // Bejelentkezési ellenőrzés
+            if (loginUsername === storedUsername && loginPassword === storedPassword) {
+                alert('Sikeres bejelentkezés!');
+                // Átirányítás másik oldalra (pl. kezdőlapra)
+                window.location.href = "index.html";
+                
+                // Felhasználónév megjelenítése a fejlécben
+                localStorage.setItem('currentUser', storedUsername);
+            } else {
+                alert('Hibás felhasználónév vagy jelszó!');
+            }
+        }
+
+        // Ellenőrzi, hogy van-e bejelentkezett felhasználó a localStorage-ban, amikor az oldal betöltődik
+        window.onload = function() {
+            let storedUsername = localStorage.getItem('currentUser');
+            if (storedUsername) {
+                // Ha van tárolt felhasználónév, akkor azt jelenítjük meg
+                document.getElementById('userDisplay').innerText = 'Bejelentkezve: ' + storedUsername;
+            }
+        };
+    </script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés / Regisztráció</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #userDisplay {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Bejelentkezés</h2>
+        <input type="text" id="loginUsername" placeholder="Felhasználónév">
+        <input type="password" id="loginPassword" placeholder="Jelszó">
+        <button onclick="login()">Bejelentkezés</button>
+
+        <h2>Regisztráció</h2>
+        <input type="text" id="registerUsername" placeholder="Felhasználónév">
+        <input type="password" id="registerPassword" placeholder="Jelszó">
+        <button onclick="register()">Regisztráció</button>
+        
+        
+        <div id="userDisplay"></div> <!-- Felhasználói információ megjelenítése -->
+    <!--</div>
+
+    <script>
+        function register() {
+            let username = document.getElementById('registerUsername').value;
+            let password = document.getElementById('registerPassword').value;
+
+            if (username === '' || password === '') {
+                alert('Kérlek töltsd ki az összes mezőt!');
+                return;
+            }
+
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+            alert('Sikeres regisztráció!');
+        }
+
+        function login() {
+            let loginUsername = document.getElementById('loginUsername').value;
+            let loginPassword = document.getElementById('loginPassword').value;
+
+            let storedUsername = localStorage.getItem('username');
+            let storedPassword = localStorage.getItem('password');
+
+            if (loginUsername === storedUsername && loginPassword === storedPassword) {
+                alert('Sikeres bejelentkezés!');
+                localStorage.setItem('currentUser', storedUsername); // Bejelentkezett felhasználó tárolása
+                displayUser();
+                window.location.href = "index.html"; // Átirányítás a kezdőlapra
+            } else {
+                alert('Hibás felhasználónév vagy jelszó!');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser'); // Bejelentkezett felhasználó törlése
+            alert('Kijelentkezés sikeres!');
+            document.getElementById('userDisplay').innerText = ''; // Kijelző ürítése
+        }
+
+        function displayUser() {
+            let storedUsername = localStorage.getItem('currentUser');
+            if (storedUsername) {
+             document.getElementById('userDisplay').innerText = 'Bejelentkezve: ' + storedUsername;
+            }
+        }
+
+        window.onload = displayUser; // Felhasználó megjelenítése oldal betöltésekor
+    </script>
+</body>
+</html>
+  -->
+
+
+  <!--<!DOCTYPE html>
+  <html lang="hu">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Bejelentkezés / Regisztráció</title>
+      <style>
+          body {
+              font-family: Arial, sans-serif;
+              background-color: #f9f9f9;
+              margin: 0;
+              padding: 0;
+          }
+          .form-container {
+              width: 300px;
+              margin: 50px auto;
+              padding: 20px;
+              background-color: white;
+              border-radius: 8px;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          }
+          input[type="text"], input[type="password"] {
+              width: 100%;
+              padding: 10px;
+              margin: 10px 0;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+          }
+          button {
+              width: 100%;
+              padding: 10px;
+              background-color: #4CAF50;
+              color: white;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+          }
+          button:hover {
+              background-color: #45a049;
+          }
+          #userDisplay {
+              margin-top: 10px;
+              font-size: 14px;
+              color: #555;
+          }
+      </style>
+  </head>
+  <body>
+      <div class="form-container">
+          <h2>Bejelentkezés</h2>
+          <input type="text" id="loginUsername" placeholder="Felhasználónév">
+          <input type="password" id="loginPassword" placeholder="Jelszó">
+          <button onclick="login()">Bejelentkezés</button>
+  
+          <h2>Regisztráció</h2>
+          <input type="text" id="registerUsername" placeholder="Felhasználónév">
+          <input type="password" id="registerPassword" placeholder="Jelszó">
+          <button onclick="register()">Regisztráció</button>
+          
+          <button onclick="logout()">Kijelentkezés</button>
+          
+          <div id="userDisplay"></div>
+      </div>
+  
+      <script>
+          function register() {
+              let username = document.getElementById('registerUsername').value;
+              let password = document.getElementById('registerPassword').value;
+  
+              if (username === '' || password === '') {
+                  alert('Kérlek töltsd ki az összes mezőt!');
+                  return;
+              }
+  
+              localStorage.setItem('username', username);
+              localStorage.setItem('password', password);
+              alert('Sikeres regisztráció!');
+          }
+  
+          function login() {
+              let loginUsername = document.getElementById('loginUsername').value;
+              let loginPassword = document.getElementById('loginPassword').value;
+  
+              let storedUsername = localStorage.getItem('username');
+              let storedPassword = localStorage.getItem('password');
+  
+              if (loginUsername === storedUsername && loginPassword === storedPassword) {
+                  alert('Sikeres bejelentkezés!');
+                  localStorage.setItem('currentUser', storedUsername);
+                  displayUser();
+                  // Itt nem irányítjuk át a felhasználót, hogy láthassa a bejelentkezett állapotot
+              } else {
+                  alert('Hibás felhasználónév vagy jelszó!');
+              }
+          }
+  
+          function logout() {
+              localStorage.removeItem('currentUser');
+              alert('Kijelentkezés sikeres!');
+              document.getElementById('userDisplay').innerText = '';
+          }
+  
+          function displayUser() {
+              let storedUsername = localStorage.getItem('currentUser');
+              if (storedUsername) {
+                  document.getElementById('userDisplay').innerText = 'Bejelentkezve: ' + storedUsername;
+              }
+          }
+  
+          window.onload = displayUser; // Felhasználó megjelenítése oldal betöltésekor
+      </script>
+  </body>
+  </html>
+   -->
+

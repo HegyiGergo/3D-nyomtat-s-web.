@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kosár</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #000000;
+        }
+        .cart-items {
+            list-style-type: none;
+            padding: 0;
+        }
+        .cart-items li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .remove-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .remove-btn:hover {
+            background-color: #d32f2f;
+        }
+        .total-price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: relative;
+        }
+        h1 {
+            margin: 0;
+        }
+        nav {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        h1 {
+            color: rgb(0, 0, 0);
+            font-size: 30px;
+        }
+        h2 {
+            color: rgb(255, 255, 255);
+            font-size: 24px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+        }
+        .product-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .image-container {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .product-images img {
+            width: auto;
+            height: 100%;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .product-images img:hover {
+            transform: scale(1.05);
+        }
+        .zoomed-img {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(2.5);
+            display: none;
+            z-index: 1000;
+        }
+        .zoomed-img img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .zoom-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 999;
+        }
+        .product-description {
+            max-width: 500px;
+            padding-left: 20px;
+        }
+        .price {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        .description {
+            margin-top: 20px;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 25px;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1>3D Design & Printing</h1>
+        <nav>
+            <a href="index.html">Főoldal</a>
+            <a href="./Akcios Termekek.html">Akciós Termékek</a>
+            <a href="./Kapcsolat.html">Kapcsolat</a>
+            <a href="./3Dnyomtatás.html">3D nyomtatás</a>
+            <a href="./kosar.html" class="cart-icon">🛒 Kosár</a>
+        </nav>
+    </div>
+    <h2>Kosár</h2>
+</header>
+<br>
+<h1>10000Ft feletti vásárlás esetén a szállítás ingyenes!</h1>
+<br>
+<br>
+<h3>A Kosár tartalma:</h3>
+<ul id="cartItems" class="cart-items">
+    <!-- A termékek itt jelennek meg -->
+</ul>
+<div id="totalPrice" class="total-price"></div>
+
+<script>
+    function displayCart() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cartItemsContainer = document.getElementById('cartItems');
+        let totalPriceContainer = document.getElementById('totalPrice');
+        cartItemsContainer.innerHTML = ''; // Kiürítjük az előző tartalmat
+        let totalPrice = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<li>Nincs termék a kosárban.</li>';
+            totalPriceContainer.innerHTML = '';
+        } else {
+            cart.forEach((item, index) => {
+                let listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    ${item.name} (${item.color}) - ${item.price} Ft 
+                    <button class="remove-btn" onclick="removeFromCart(${index})">Eltávolítás</button>
+                `;
+                cartItemsContainer.appendChild(listItem);
+                totalPrice += item.price;
+            });
+            totalPriceContainer.innerHTML = `Teljes összeg: ${totalPrice} Ft (+szállítás)`;
+        }
+    }
+
+    function removeFromCart(index) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.splice(index, 1); // Termék eltávolítása
+        localStorage.setItem('cart', JSON.stringify(cart));
+        displayCart(); // Kosár újra megjelenítése a törlés után
+    }
+
+    // Betöltéskor megjelenítjük a kosár tartalmát
+    displayCart();
+</script>
+<h3><mark>Figyelem!! Termékeinket NE tegye ki hőhatásnak, és csak beltéren használja! Kültéren károsodhatnak!</mark></h3>
+<h3>Termékeinken minimális nyomtatási hiba lehetséges, ezeket utókezeljük, ettől függetlenül maradhatnak minimális hibák, de ezek a termék funkcióját nem korlátozzák!</h3>
+<h1><b>A fizetés menete:</b></h1>
+<h4>Egyenlőre nem lehet online rendelni (ez a közeljövőben változhat), ezért legyen szíves E-mailben (Print screen-t) elküldeni a kosár tartalmát, és 1-2 munkanapon belül reagálni fogok.</h4>
+<h3>1, Előre utalásos fizetés:</h3>
+<h4>A megrendelés leadása után 1-2 munkanapon belül küldünk egy visszaigazoló E-mailt. Ebben az E-mailben elküldjük a cég számlaszámát, amire a termékek árát kell elutalni. Amint átér az összeg, elkezdjük a termék gyártását, és értesítjük Önt, amikor átadjuk a futárszolgálatnak.</h4>
+<h3>2, Utánvétes fizetés:</h3>
+<h4>A megrendelés leadása után 1-2 munkanapon belül küldünk egy visszaigazoló E-mailt, és elkezdjük a termék gyártását. A futárnál lehet fizetni az átvételkor.</h4>
+<h4>A szállítási díjat a visszaigazoló E-mailben küldjük el (~1499 Ft + utánvét).</h4>
+
+<!-- Szállítási mód választó -->
+<div class="color-selector">
+    <label for="shippingMethod">Válasszon fizetési módot:</label>
+    <select id="shippingMethod">
+        <option value="standard">Előre utalás </option>
+        <option value="express">Utánvét </option>
+    </select>
+</div>
+<div class="color-selector">
+    <label for="shippingMethod">Válasszon szállítási módot:</label>
+    <select id="shippingMethod">
+        <option value="standard">Standard szállítás (1499 Ft)</option>
+        <option value="express">Expressz szállítás (2499 Ft)</option>
+    </select>
+</div>
+
+<!-- Átvételi mód választó -->
+<div class="color-selector">
+    <label for="deliveryType">Válasszon átvételi módot:</label>
+    <select id="deliveryType">
+
+        <option value="home">Otthoni átvétel</option>
+        <option value="pickup">Személyes átvétel</option>
+    </select>
+</div>
+
+<footer>
+    <p>&copy; 2024 3D Design & Printing. Minden jog fenntartva.</p>
+</footer>
+</body>
+</html>

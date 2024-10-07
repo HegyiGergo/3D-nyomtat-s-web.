@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termék Leírása</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: relative;
+        }
+        h1 {
+            margin: 0;
+        }
+        nav {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        h1 {
+            color: white;
+            font-size: 24px;
+        }
+        .product-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .image-container {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .product-images img {
+            width: auto;
+            height: 100%;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .product-images img:hover {
+            transform: scale(1.05);
+        }
+        .zoomed-img {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(2.5);
+            display: none;
+            z-index: 1000;
+        }
+        .zoomed-img img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .zoom-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 999;
+        }
+        .product-description {
+            max-width: 500px;
+            padding-left: 20px;
+        }
+        .price {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        .description {
+            margin-top: 20px;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 25px;
+            border-radius: 25px;
+        }
+        .cart-icon {
+            margin-right: 20px;
+        }
+        .card button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .card button:hover {
+            background-color: #45a049;
+        }
+        .color-selector {
+            margin-top: 15px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>3D Design & Printing</h1>
+            <nav>
+                <a href="index.html">Főoldal</a>
+                <a href="./Akcios Termekek.html">Akciós Termékek</a>
+                <a href="./Kapcsolat.html">Kapcsolat</a>
+                <a href="./3Dnyomtatás.html">3D nyomtatás</a>
+            <a href="./kosar.html" class="cart-icon">🛒 Kosár</a>
+            </nav>
+        </div>
+        <!-- <h2>3D nyomtatott  seprűtartó</h2> -->
+    </header>
+
+<div class="container">
+    <div class="product-images">
+        <div class="image-container">
+            <img src="./képek/seprutarto/kép1.webp" data-zoom-src="./képek/seprutarto/kép1.webp" alt="Product Image 1" onclick="zoomImage(this)">
+        </div>
+        <div class="image-container">
+            <img src="./képek/seprutarto/kép2.webp" data-zoom-src="./képek/seprutarto/kép2.webp" alt="Product Image 2" onclick="zoomImage(this)">
+        </div>
+        <div class="image-container">
+            <img src="./képek/seprutarto/kép3.webp" data-zoom-src="./képek/seprutarto/kép3.webp" alt="Product Image 3" onclick="zoomImage(this)">
+        </div>
+        <div class="image-container">
+            <img src="./képek/seprutarto/kép4.webp" data-zoom-src="./képek/seprutarto/kép4.webp" alt="Product Image 4" onclick="zoomImage(this)">
+        </div>
+    </div>
+
+    <div class="product-description">
+        <h2>3D nyomtatott seprűtartó - Részletes leírás</h2>
+        <p>Méretek: 4 cm magas, 10 cm széles és 2,2 cm vastag.<br><br>Anyaga: PLA műanyag, ami környezetbarát és újrahasznosítható.<br><br>FONTOS!!: A terméket NE tegye ki hőhatásnak!</p>
+        <div class="price">Ár: 599 Ft</div>
+        
+        <!-- Színválasztó elem -->
+        <div class="color-selector">
+            <label for="color">Válasszon színt:</label>
+            <select id="color">
+                <option value="fekete">Fekete</option>
+                <option value="fehér">Fehér</option>
+            </select>
+        </div>
+<br>
+        <!-- Kosár gomb -->
+        <div>
+            <button onclick="addToCart('3D nyomtatott seprűtartó', 599)">Kosárba</button>
+        </div>
+    </div>
+</div>
+
+<div class="zoom-overlay" onclick="closeZoom()"></div>
+<div class="zoomed-img" id="zoomedImg">
+    <img src="" alt="Zoomed Image" id="zoomedImage">
+</div>
+
+<script>
+    let scale = 1.5;
+    let zoomedImage = document.getElementById("zoomedImage");
+    let zoomedImgDiv = document.getElementById("zoomedImg");
+    let overlay = document.querySelector(".zoom-overlay");
+
+    function zoomImage(imageElement) {
+        const zoomSrc = imageElement.getAttribute("data-zoom-src");
+        zoomedImage.src = zoomSrc;
+        zoomedImgDiv.style.display = "block";
+        overlay.style.display = "block";
+    }
+
+    function closeZoom() {
+        zoomedImgDiv.style.display = "none";
+        overlay.style.display = "none";
+    }
+
+    function addToCart(name, price) {
+        const selectedColor = document.getElementById("color").value;
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({name: name, price: price, color: selectedColor});
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(name + ' (' + selectedColor + ') hozzáadva a kosárhoz!');
+    }
+
+    zoomedImgDiv.addEventListener("wheel", function (event) {
+        event.preventDefault();
+        if (event.deltaY < 0) {
+            scale += 0.15;
+        } else {
+            scale = Math.max(1, scale - 0.1);
+        }
+        zoomedImgDiv.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
